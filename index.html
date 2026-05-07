@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Studio Forma — Parrucchiere a Cesena</title>
+  <meta name="description" content="Taglio, colore e styling a Cesena. Prenota il tuo appuntamento da Studio Forma." />
+
+  <meta property="og:title" content="Studio Forma — Parrucchiere a Cesena" />
+  <meta property="og:description" content="Taglio, colore e styling a Cesena. Prenota il tuo appuntamento da Studio Forma." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --color-bg: #f8f4ef;
+      --color-surface: #fdfbf8;
+      --color-surface-2: #f3ece4;
+      --color-border: #ded3c8;
+      --color-divider: #e7ddd4;
+
+      --color-text: #241d18;
+      --color-text-muted: #74685d;
+      --color-text-faint: #ac9f93;
+      --color-text-inverse: #fffaf6;
+
+      --color-primary: #7b4b38;
+      --color-primary-hover: #623b2b;
+      --color-primary-highlight: #ead8ce;
+
+      --radius-sm: 0.4rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px rgba(36, 29, 24, 0.05);
+      --shadow-md: 0 12px 32px rgba(36, 29, 24, 0.08);
+
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Inter", system-ui, sans-serif;
+
+      --content: 1120px;
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #171412;
+      --color-surface: #201c19;
+      --color-surface-2: #2a2420;
+      --color-border: #3b342e;
+      --color-divider: #312b26;
+
+      --color-text: #f3ebe4;
+      --color-text-muted: #c4b7ab;
+      --color-text-faint: #8d8075;
+      --color-text-inverse: #1d1713;
+
+      --color-primary: #d2a488;
+      --color-primary-hover: #e1b79d;
+      --color-primary-highlight: #3b2d25;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 12px 32px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { border: 0; background: none; cursor: pointer; }
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--content));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: var(--space-3);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-full);
+      z-index: 100;
+    }
+    .skip-link:focus { left: var(--space-3); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--color-bg) 84%, transparent);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-links {
+      display: none;
+      gap: var(--space-5);
+      align-items: center;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .theme-toggle,
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      background: var(--color-surface);
+      transition: all var(--transition);
+    }
+
+    .theme-toggle:hover,
+    .menu-toggle:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 var(--space-5);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-primary:hover { background: var(--color-primary-hover); }
+
+    .btn-secondary {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .mobile-menu {
+      display: none;
+      padding-bottom: var(--space-4);
+    }
+
+    .mobile-menu.open {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .mobile-menu a {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-divider);
+      color: var(--color-text-muted);
+    }
+
+    .hero {
+      padding: clamp(var(--space-12), 8vw, var(--space-24)) 0 var(--space-12);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-full);
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2 {
+      font-family: var(--font-display);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: var(--text-2xl);
+      max-width: 12ch;
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    .lead {
+      max-width: 58ch;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-points {
+      display: grid;
+      gap: var(--space-3);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .hero-points div {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      flex: 0 0 auto;
+      background: var(--color-primary);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-image {
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .hero-card-body {
+      padding: var(--space-5);
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .stats {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: var(--space-6);
+    }
+
+    .stat {
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: var(--text-lg);
+      font-family: var(--font-display);
+    }
+
+    section {
+      padding: clamp(var(--space-10), 7vw, var(--space-20)) 0;
+    }
+
+    .section-head {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-8);
+      max-width: 60ch;
+    }
+
+    .section-head p { color: var(--color-text-muted); }
+
+    h2 {
+      font-size: var(--text-xl);
+    }
+
+    .cards {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .card {
+      padding: var(--space-5);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card h3 {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-2);
+    }
+
+    .card p {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .price {
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: var(--text-sm);
+    }
+
+    .gallery {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .gallery figure {
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    .gallery img {
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .gallery figcaption {
+      padding: var(--space-3) var(--space-4);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .testimonial {
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    .testimonial p {
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .testimonial small {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: var(--space-5);
+    }
+
+    .contact-panel,
+    .contact-form {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-list {
+      display: grid;
+      gap: var(--space-4);
+      margin-top: var(--space-5);
+      color: var(--color-text-muted);
+    }
+
+    .info-list strong {
+      display: block;
+      color: var(--color-text);
+      margin-bottom: 0.15rem;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    .field {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 0.9rem 1rem;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-note {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .cta-band {
+      padding: var(--space-8);
+      border-radius: var(--radius-xl);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .cta-band p {
+      max-width: 52ch;
+      color: rgba(255,250,246,0.82);
+    }
+
+    .site-footer {
+      padding: var(--space-8) 0 var(--space-12);
+      border-top: 1px solid var(--color-divider);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .sticky-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 25;
+      padding: 0.75rem;
+      background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .sticky-bar .btn {
+      width: 100%;
+    }
+
+    .fade-in {
+      opacity: 1;
+    }
+
+    @supports (animation-timeline: view()) {
+      .fade-in {
+        opacity: 0;
+        animation: reveal linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%;
+      }
+      @keyframes reveal {
+        to { opacity: 1; }
+      }
+    }
+
+    @media (min-width: 760px) {
+      .nav-links { display: flex; }
+      .menu-toggle { display: none; }
+      .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .gallery { grid-template-columns: repeat(3, 1fr); }
+      .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+      .contact-grid { grid-template-columns: 0.9fr 1.1fr; }
+      .footer-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .sticky-bar { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="Studio Forma, home">
+        <span class="brand-mark">S</span>
+        <span>Studio Forma</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="#servizi">Servizi</a>
+        <a href="#galleria">Galleria</a>
+        <a href="#recensioni">Recensioni</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambia tema">
+          <span aria-hidden="true">◐</span>
+        </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+          <span aria-hidden="true">☰</span>
+        </button>
+        <a class="btn btn-primary" href="https://wa.me/393331234567" target="_blank" rel="noopener noreferrer">
+          Prenota
+        </a>
+      </div>
+    </div>
+
+    <div class="container mobile-menu" id="mobile-menu">
+      <a href="#servizi">Servizi</a>
+      <a href="#galleria">Galleria</a>
+      <a href="#recensioni">Recensioni</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+  </header>
+
+  <main id="contenuto">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Parrucchiere a Cesena</span>
+          <h1>Tagli, colore e styling con un tocco moderno.</h1>
+          <p class="lead">
+            Studio Forma è un salone elegante e accogliente, pensato per chi vuole sentirsi bene subito:
+            consulenza personalizzata, tecniche attuali e attenzione vera ai dettagli.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/393331234567" target="_blank" rel="noopener noreferrer">Prenota su WhatsApp</a>
+            <a class="btn btn-secondary" href="#servizi">Scopri i servizi</a>
+          </div>
+
+          <div class="hero-points">
+            <div><span class="dot"></span><span>Prima consulenza veloce e consigli su taglio o colore.</span></div>
+            <div><span class="dot"></span><span>Orari comodi, atmosfera rilassata, prodotti professionali.</span></div>
+            <div><span class="dot"></span><span>Perfetto per donna, uomo e styling eventi.</span></div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>12+</strong>
+              <span>Anni di esperienza</span>
+            </div>
+            <div class="stat">
+              <strong>4.9/5</strong>
+              <span>Recensioni clienti</span>
+            </div>
+            <div class="stat">
+              <strong>6 giorni</strong>
+              <span>Aperti in settimana</span>
+            </div>
+          </div>
+        </div>
+
+        <article class="hero-card fade-in">
+          <img
+            class="hero-image"
+            src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=80"
+            alt="Interno elegante di un salone per capelli"
+            width="1200"
+            height="1500"
+            loading="eager"
+          />
+          <div class="hero-card-body">
+            <strong>Un salone pensato per farti tornare volentieri.</strong>
+            <p style="color: var(--color-text-muted);">
+              Ambiente curato, consulenza sincera e risultati naturali o decisi, in base al tuo stile.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="servizi">
+      <div class="container">
+        <div class="section-head fade-in">
+          <span class="eyebrow">Servizi</span>
+          <h2>I trattamenti più richiesti.</h2>
+          <p>
+            Questa sezione è ideale per i servizi principali che vuoi vendere subito, con prezzi base chiari
+            e call to action veloci.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card fade-in">
+            <h3>Taglio & Piega</h3>
+            <p>Consulenza viso-capello, taglio personalizzato e piega finale con styling adatto al tuo look.</p>
+            <span class="price">Da €35</span>
+          </article>
+
+          <article class="card fade-in">
+            <h3>Colore & Schiariture</h3>
+            <p>Colore pieno, tonalizzazione, balayage o schiariture con attenzione al risultato naturale.</p>
+            <span class="price">Da €65</span>
+          </article>
+
+          <article class="card fade-in">
+            <h3>Evento & Styling</h3>
+            <p>Acconciature per cerimonie, occasioni speciali e styling professionale con prova su richiesta.</p>
+            <span class="price">Su preventivo</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galleria">
+      <div class="container">
+        <div class="section-head fade-in">
+          <span class="eyebrow">Galleria</span>
+          <h2>Alcuni risultati e l’atmosfera del salone.</h2>
+          <p>
+            Qui in produzione puoi mettere 3-6 foto reali del cliente. Per vendere il sito, questa parte è
+            fortissima perché rende subito il lavoro più credibile.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <figure class="fade-in">
+            <img
+              src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=80"
+              alt="Taglio donna con styling mosso"
+              width="900"
+              height="1125"
+              loading="lazy"
+            />
+            <figcaption>Tagli moderni e linee morbide.</figcaption>
+          </figure>
+
+          <figure class="fade-in">
+            <img
+              src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80"
+              alt="Postazione professionale per hairstyling"
+              width="900"
+              height="1125"
+              loading="lazy"
+            />
+            <figcaption>Postazioni curate e atmosfera elegante.</figcaption>
+          </figure>
+
+          <figure class="fade-in">
+            <img
+              src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80"
+              alt="Trattamento colore su capelli lunghi"
+              width="900"
+              height="1125"
+              loading="lazy"
+            />
+            <figcaption>Colore, luce e consulenza personalizzata.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="recensioni">
+      <div class="container">
+        <div class="section-head fade-in">
+          <span class="eyebrow">Recensioni</span>
+          <h2>La fiducia si costruisce anche così.</h2>
+          <p>
+            Qui puoi incollare recensioni Google vere del cliente. Per le attività locali questa sezione aumenta
+            tantissimo la conversione.
+          </p>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="testimonial fade-in">
+            <p>“Finalmente un taglio che mi valorizza davvero. Ambiente bellissimo e super professionali.”</p>
+            <small>Martina R. — cliente</small>
+          </article>
+          <article class="testimonial fade-in">
+            <p>“Mi hanno seguito sul colore con molta cura. Risultato naturale, proprio quello che volevo.”</p>
+            <small>Elena P. — cliente</small>
+          </article>
+          <article class="testimonial fade-in">
+            <p>“Prenotazione facile, orari rispettati e ottimo servizio. Tornerò sicuramente.”</p>
+            <small>Sara L. — cliente</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contatti">
+      <div class="container">
+        <div class="section-head fade-in">
+          <span class="eyebrow">Contatti</span>
+          <h2>Prenota o passa a trovarci.</h2>
+          <p>
+            In questa sezione metti indirizzo reale, numero, mappa Google e magari il link diretto a WhatsApp.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <aside class="contact-panel fade-in">
+            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-3);">Studio Forma</h3>
+            <p style="color: var(--color-text-muted);">
+              Un salone per chi cerca uno stile pulito, curato e personale, senza complicazioni.
+            </p>
+
+            <div class="info-list">
+              <div>
+                <strong>Indirizzo</strong>
+                Via Esempio 24, Cesena
+              </div>
+              <div>
+                <strong>Telefono</strong>
+                <a href="tel:+393331234567">+39 333 123 4567</a>
+              </div>
+              <div>
+                <strong>Orari</strong>
+                Mar–Sab · 09:00–19:00
+              </div>
+              <div>
+                <strong>Instagram</strong>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">@studioforma.cesena</a>
+              </div>
+              <div>
+                <strong>Mappa</strong>
+                <a href="https://maps.google.com/?q=Cesena" target="_blank" rel="noopener noreferrer">Apri su Google Maps</a>
+              </div>
+            </div>
+          </aside>
+
+          <form class="contact-form fade-in" action="https://formspree.io/f/your-id" method="POST">
+            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Richiedi un appuntamento</h3>
+            <p class="form-note">
+              Puoi collegare questo form a Formspree o Netlify Forms senza backend.
+            </p>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="nome">Nome</label>
+                <input id="nome" name="nome" type="text" required />
+              </div>
+
+              <div class="field">
+                <label for="telefono">Telefono</label>
+                <input id="telefono" name="telefono" type="tel" required />
+              </div>
+
+              <div class="field">
+                <label for="servizio">Servizio richiesto</label>
+                <input id="servizio" name="servizio" type="text" placeholder="Es. taglio, colore, piega" />
+              </div>
+
+              <div class="field">
+                <label for="messaggio">Messaggio</label>
+                <textarea id="messaggio" name="messaggio" placeholder="Indicaci il giorno o la fascia oraria preferita"></textarea>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Invia richiesta</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-band fade-in">
+          <h2 style="font-size: var(--text-xl);">Pronta per il tuo prossimo look?</h2>
+          <p>
+            Prenota in pochi secondi su WhatsApp oppure chiamaci direttamente. Rispondiamo in giornata.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap: var(--space-3);">
+            <a class="btn btn-secondary" style="background: rgba(255,250,246,0.12); color: var(--color-text-inverse); border-color: rgba(255,250,246,0.22);" href="https://wa.me/393331234567" target="_blank" rel="noopener noreferrer">Scrivici su WhatsApp</a>
+            <a class="btn btn-secondary" style="background: transparent; color: var(--color-text-inverse); border-color: rgba(255,250,246,0.22);" href="tel:+393331234567">Chiama ora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>© 2026 Studio Forma — Parrucchiere a Cesena</p>
+      <p>Sito demo riutilizzabile per attività locali.</p>
+    </div>
+  </footer>
+
+  <div class="sticky-bar">
+    <div class="container">
+      <a class="btn btn-primary" href="https://wa.me/393331234567" target="_blank" rel="noopener noreferrer">Prenota su WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.querySelector("[data-theme-toggle]");
+      const menuBtn = document.querySelector(".menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      let theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      root.setAttribute("data-theme", theme);
+
+      if (themeBtn) {
+        themeBtn.addEventListener("click", function () {
+          theme = theme === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", theme);
+        });
+      }
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", function () {
+          const open = mobileMenu.classList.toggle("open");
+          menuBtn.setAttribute("aria-expanded", String(open));
+        });
+
+        mobileMenu.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("open");
+            menuBtn.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
